@@ -35,6 +35,19 @@ class VCardUtils {
             return vCard
         }
 
+        fun createStringVcard(vCard: VCard):String{
+            return  "BEGIN:VCARD\n" +
+                    "VERSION:2.1\n" +
+                    "N:"+ vCard.fullName+ "\n" +
+                    "FN:"+vCard.fullName+"\n" +
+                    "ORG:Alteca.\n" +
+                    "TITLE:"+vCard.title+"\n" +
+                    "TEL;WORK;VOICE:"+ vCard.tels[0] +"\n" +
+                    "TEL;HOME;VOICE:"+vCard.tels[1]+"\n" +
+                    "ADR;WORK;PREF:"+vCard.adrs[0]+"\n" +
+                    "EMAIL:"+vCard.emails[0]+"\n" +
+                    "END:VCARD"
+        }
 
         /**
          * Transform the  FirebaseVisionBarcode.Address into EntryType

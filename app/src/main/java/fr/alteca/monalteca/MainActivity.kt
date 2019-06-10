@@ -1,5 +1,6 @@
 package fr.alteca.monalteca
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -10,8 +11,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.FirebaseApp
+import fr.alteca.monalteca.model.VCard
+import fr.alteca.monalteca.model.utils.VCardUtils
 import fr.alteca.monalteca.qrutils.QrUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_modify.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -22,7 +26,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        mScanCodeFAB.setOnClickListener { view ->
+        mScanCodeFAB.setOnClickListener {
            val intent = Intent(this,CameraActivity::class.java)
             startActivity(intent)
         }
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        val qrString = "HOLA"
+        val qrString = VCardUtils.createStringVcard(readVcardFromSharedPreferences())
         val qrCodeBitmap=QrUtils.qrCodeGenerator(qrString)
         mQrCodeIv.setImageBitmap(qrCodeBitmap)
 
@@ -60,21 +64,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.modify -> goToModifyActivity()
             else -> return super.onOptionsItemSelected(item)
         }
+        return true
+    }
+
+    private fun readVcardFromSharedPreferences():VCard{
+        val vCard = VCard()
+        val mySharedPreferences =getSharedPreferences(getString(R.string.vcard), Context.MODE_PRIVATE)
+        vCard.fullName= mySharedPreferences.getString(getString(R.string.vcard_name),"")
+        vCard.title = mySharedPreferences.getString(getString(R.string.vcard_function),"")
+        vCard.tels= Array(2){
+            VCard.Tel(VCardUtils.Companion.EntryType.Work.name,mySharedPreferences.getString(getString(R.string.vcard_tel_fix), ""))
+            VCard.Tel(VCardUtils.Companion.EntryType.Work.name,mySharedPreferences.getString(getString(R.string.vcard_tel_mobile),""))
+        }
+        vCard.org="Alteca"
+        vCard.adrs = Array(1){
+            VCard.Adr(VCardUtils.Companion.EntryType.Work.name,mySharedPreferences.getString(getString(R.string.vcard_adr),""))
+        }
+        vCard.emails= Array(1){
+            VCard.Email(VCardUtils.Companion.EntryType.Work.name,mySharedPreferences.getString(getString(R.string.vcard_email),""))
+        }
+
+        return vCard
+    }
+
+    private fun goToModifyActivity() {
+        val intent = Intent(this,ModifyActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
             R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
 
             }
             R.id.nav_manage -> {
@@ -83,11 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_share -> {
 
             }
-            R.id.nav_send -> {
-
-            }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

@@ -160,6 +160,7 @@ class CameraActivity : AppCompatActivity(),ImageReader.OnImageAvailableListener,
                             if(barcode.valueType == FirebaseVisionBarcode.TYPE_CONTACT_INFO){
                                 val contactInfo=barcode.contactInfo
                                 if (contactInfo != null) {
+                                    Log.i("vcard",contactInfo.toString())
                                     vCardArray.add(VCardUtils.vCardFromContactInfo(contactInfo))
                                 }
                             }

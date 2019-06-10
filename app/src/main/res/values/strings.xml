@@ -5,11 +5,25 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Paramètres</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="gson_info_tag">gson_info_tag</string>
     <string name="gson_type_tag">gson_type_tag</string>
+    <string name="modifier_carte">Modifier ma carte</string>
+    <string name="full_name">NOM, Prenom</string>
+    <string name="function">Fonction</string>
+    <string name="tel_fix">Telephone fixe</string>
+    <string name="mobile">Mobile</string>
+    <string name="adr">Adresse</string>
+    <string name="email">Email</string>
+    <string name="vcard">vcard</string>
+    <string name="vcard_name">vcard_name</string>
+    <string name="vcard_function">vcard_function</string>
+    <string name="vcard_tel_fix">vcard_tel_fix</string>
+    <string name="vcard_tel_mobile">vcard_tel_mobile</string>
+    <string name="vcard_adr">vcard_adr</string>
+    <string name="vcard_email">email</string>
 </resources>
