@@ -40,12 +40,12 @@ class VCardUtils {
                     "VERSION:2.1\n" +
                     "N:"+ vCard.fullName+ "\n" +
                     "FN:"+vCard.fullName+"\n" +
-                    "ORG:Alteca.\n" +
+                    "ORG:Alteca\n" +
                     "TITLE:"+vCard.title+"\n" +
-                    "TEL;WORK;VOICE:"+ vCard.tels[0] +"\n" +
-                    "TEL;HOME;VOICE:"+vCard.tels[1]+"\n" +
-                    "ADR;WORK;PREF:"+vCard.adrs[0]+"\n" +
-                    "EMAIL:"+vCard.emails[0]+"\n" +
+                    "TEL;WORK;VOICE:"+ vCard.tels[0].Telnumber +"\n" +
+                    "TEL;HOME;VOICE:"+vCard.tels[1].Telnumber+"\n" +
+                    "ADR;WORK;PREF:"+vCard.adrs[0].adr+"\n" +
+                    "EMAIL:"+vCard.emails[0].email+"\n" +
                     "END:VCARD"
         }
 
